@@ -6,3 +6,18 @@ body {
   background-color: #f0f0f0;
 
 }
+
+
+.row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
