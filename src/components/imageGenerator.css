@@ -1,0 +1,15 @@
+.prompt textarea {
+    max-height: 80px;
+    width: 400px;
+}
+
+.generate-button button {
+    width: 240px;
+    height: 30px;
+}
+
+.image-generated {
+    display: flex;
+    justify-content: center;
+    height: 300px;
+}
