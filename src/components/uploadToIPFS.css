@@ -1,0 +1,16 @@
+.upload-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+}
+
+.upload-button button {
+    height: 30px;
+    width: 300px;
+}

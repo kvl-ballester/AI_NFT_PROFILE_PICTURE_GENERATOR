@@ -1,6 +1,9 @@
 import { AI_API } from '../components/ImageGenerator';
+import * as ipfsApi from '../api/ipfsApi';
 
-export default async function generateImage(apiUrl, body) {
+
+
+export async function generateImage(apiUrl, body) {
     const api = AI_API.find(ai => ai.api === apiUrl)
 
     const headers =  { 
@@ -23,10 +26,30 @@ export default async function generateImage(apiUrl, body) {
         }
 
         const blob = await response.blob();
-        return URL.createObjectURL(blob)
+        return blob
         
     } catch (error) {
         throw new Error(`Error en la API: ${error.message}`);
     }
 
 }
+
+export async function uploadImageToIpfs(blob, imageName) {
+    if (!imageName) {
+        imageName = `image-${Date.now()}`
+    }
+
+    try {
+        const file = new File([blob], imageName, { type: blob.type });
+        const cid = await ipfsApi.uploadImageToIpfs(file);
+        console.log(cid);
+        return cid;
+
+    } catch (error) {
+        throw new Error(`Error al subir el archivo: ${error.message}`);
+    }
+    
+
+}
+
+
