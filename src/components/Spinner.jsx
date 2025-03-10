@@ -1,5 +1,5 @@
 import "./spinner.css";
-export default function Spinner({ size = '40px', color = '#3498db' }) {
+export default function Spinner({ size = '40px', color = '#3498db', text = '' }) {
     return (
       <div className="spinner-container">
         <div
@@ -10,6 +10,7 @@ export default function Spinner({ size = '40px', color = '#3498db' }) {
             borderColor: `${color} transparent transparent transparent`,
           }}
         ></div>
+        <div className="text">{text}</div>
       </div>
     );
 
