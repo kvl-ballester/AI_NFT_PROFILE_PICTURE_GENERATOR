@@ -40,16 +40,24 @@ export async function uploadImageToIpfs(blob, imageName) {
     }
 
     try {
-        const file = new File([blob], imageName, { type: blob.type });
-        const cid = await ipfsApi.uploadImageToIpfs(file);
-        console.log(cid);
-        return cid;
+        const filename = createFilename(blob, imageName);
+        const file = new File([blob], filename, { type: blob.type });
+        const response = await ipfsApi.uploadImageToIpfs(file);
+        return response;
 
     } catch (error) {
         throw new Error(`Error al subir el archivo: ${error.message}`);
     }
     
 
+}
+
+
+
+function createFilename(blob, name) {
+    const extension = blob.type.split('/')[1];
+    return `${name}.${extension}`
+    
 }
 
 
