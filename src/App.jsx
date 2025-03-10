@@ -10,39 +10,75 @@ function reducer(state, action) {
     case 'GENERATE_IMAGE':
       return {
         ...state,
-        isImageGenerationLoanding: true,
+        isGeneratingImage: true,
         imageGenerationError: null
       }
     case 'GENERATE_IMAGE_SUCCESS':
       return {
         ...state,
-        isImageGenerationLoanding: false,
-        imageGeneratedBlob: action.payload
+        isGeneratingImage: false,
+        generatedImageBlob: action.payload
       }
     case 'GENERATE_IMAGE_ERROR':
       return {
         ...state,
-        isImageGenerationLoanding: false,
+        isGeneratingImage: false,
         imageGenerationError: action.payload
       }
     
     case 'UPLOAD_IMAGE':
       return {
         ...state,
-        isImageUploading: true,
+        isUploadingImage: true,
         imageUploadError: null
       }
     case 'UPLOAD_IMAGE_SUCCESS':
       return {
         ...state,
-        isImageUploading: false,
-        imageUploadedCid: action.payload
+        isUploadingImage: false,
+        uploadedImageData: action.payload
       }
     case 'UPLOAD_IMAGE_ERROR':
       return {
         ...state,
-        isImageUploading: false,
+        isUploadingImage: false,
         imageUploadError: action.payload
+      }
+    case 'UPLOAD_IMAGE_METADATA':
+      return {
+        ...state,
+        isUploadingMetadata: true,
+        metadataUploadError: null
+      }
+    case 'UPLOAD_IMAGE_METADATA_SUCCESS':
+      return {
+        ...state,
+        isUploadingMetadata: false,
+        uploadedMetadata: action.payload
+      }
+    case 'UPLOAD_IMAGE_METADATA_ERROR':
+      return {
+        ...state,
+        isUploadingMetadata: false,
+        metadataUploadError: action.payload
+      }
+    case 'GET_IMAGE_METADATA':
+      return {
+        ...state,
+        isFetchingMetadata: true,
+        fetchMetadataError: null
+      }
+    case 'GET_IMAGE_METADATA_SUCCESS':
+      return {
+        ...state,
+        isFetchingMetadata: false,
+        fetchedMetadata: action.payload
+      }
+    case 'GET_IMAGE_METADATA_ERROR':
+      return {
+        ...state,
+        isFetchingMetadata: false,
+        fetchMetadataError: action.payload
       }
     default:
       return state
@@ -55,12 +91,22 @@ function App() {
   const [prompt, setPrompt] = useState("a monkey with a real madrid tshirt")
 
   const [state, dispatch] = useReducer(reducer, {
-    isImageGenerationLoanding: false,
+    //Image Generation
+    isGeneratingImage: false,
     imageGenerationError: null,
-    imageGeneratedBlob: null,
-    isImageUploading: false,
-    imageUploadedCid: null,
-    imageUploadError: false
+    generatedImageBlob: null,
+    //Response from uploading-file operation
+    isUploadingImage: false,
+    uploadedImageData: null,
+    imageUploadError: null,
+    //Response from uploading-json operation
+    isUploadingMetadata: false,
+    uploadedMetadata: null,
+    metadataUploadError: null,
+    //Metadata itself
+    isFetchingMetadata: false,
+    fetchedMetadata: null,
+    fetchMetadataError: null
   })
 
   return (
@@ -69,7 +115,7 @@ function App() {
       <ImageGenerator state={state} dispatch={dispatch} apiUrl={apiUrl} setApiUrl={setApiUrl} 
         prompt={prompt} setPrompt={setPrompt} 
       />
-      <UploadToIPFS state={state} dispatch={dispatch}/>
+      <UploadToIPFS prompt={prompt} state={state} dispatch={dispatch}/>
       
       
     </div>
