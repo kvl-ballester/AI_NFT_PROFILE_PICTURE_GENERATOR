@@ -6,7 +6,6 @@ export async function getMetadataByCid(cid) {
             throw new Error(`Error getting metadata: ${response.statusText}`);
         }
         const json = await response.json();
-        console.log("json", json)
         return json;
 
     } catch (error) {
