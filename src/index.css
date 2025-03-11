@@ -21,3 +21,32 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+button {
+  width: 240px;
+}
+
+textarea:disabled {
+  resize: none;
+}
+
+/* Personalizar el scroll */
+textarea::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra */
+}
+
+/* Fondo del track (la parte por donde se mueve el scroll) */
+textarea::-webkit-scrollbar-track {
+  background: none; /* Elimina el rectángulo blanco */
+}
+
+/* Estilo del "thumb" (la barra que se mueve) */
+textarea::-webkit-scrollbar-thumb {
+  background: #3498db; /* Color de la barra */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Hover sobre el thumb */
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #2980b9; /* Color más oscuro al pasar el mouse */
+}
