@@ -3,6 +3,8 @@ import ImageGenerator from './components/ImageGenerator'
 import { AI_API } from './components/ImageGenerator'
 import './App.css'
 import UploadToIPFS from './components/UploadToIPFS'
+import MintNft from './components/MintNft'
+import Header from './components/Header'
 
 
 function reducer(state, action) {
@@ -111,13 +113,19 @@ function App() {
 
   return (
     <div className="app main">
+      <Header />
       <h1>AI NFT GENERATOR</h1>
       <ImageGenerator state={state} dispatch={dispatch} apiUrl={apiUrl} setApiUrl={setApiUrl} 
         prompt={prompt} setPrompt={setPrompt} 
       />
-      <UploadToIPFS prompt={prompt} state={state} dispatch={dispatch}/>
-      
-      
+      {state.generatedImageBlob && 
+        <UploadToIPFS prompt={prompt} state={state} dispatch={dispatch}/>
+      }
+
+      {state.fetchedMetadata && 
+        <MintNft state={state} dispatch={dispatch}/>
+      }
+
     </div>
   )
 }

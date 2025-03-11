@@ -1,0 +1,45 @@
+.metadata.card {
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #828282;
+    width: 400px;
+}
+
+.mint-nft .card > div {
+    margin: 0%;
+    justify-content: space-between;
+}
+
+.col.info {
+    gap: 12px;
+}
+
+.col.info  *:disabled {
+    border: none;
+    background-color: transparent;
+}
+
+.col.image img{
+    border-radius: 12px;
+    height: 180px;
+
+}
+
+
+.card {
+    position: relative;
+
+    background-color: #3498db;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+
+.card {
+
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 50%);
+background-color: #67baf2;
+border-radius: 10px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+}
