@@ -2,6 +2,7 @@ import * as imageService from "../service/imageService"
 import * as metadataService from "../service/metadataService"
 import { useEffect, useState } from "react"
 import './uploadToIPFS.css'
+import ok from '../assets/ok.png'
 import Spinner from "./Spinner"
 
 export default function UploadToIPFS({prompt, state, dispatch}) {
@@ -78,13 +79,17 @@ export default function UploadToIPFS({prompt, state, dispatch}) {
 
 
     return (
-        <div className="upload2ipfs">
+        <div className="upload-to-ipfs">
             <h1>Upload To IPFS</h1>
             <p>The InterPlanetary File System (IPFS) is a set of composable, peer-to-peer protocols for addressing, routing, and 
                 transferring content-addressed data in a decentralized file system. 
             </p>
-            <div className="upload-button">
-                <input type="text" placeholder="Image name" value={imageName} onChange={(e) => setImageName(e.target.value)}/>
+            <div className="col upload-button">
+                <div className="col name field">
+                    <label htmlFor="">Image name</label>
+                    <input type="text" placeholder="Image name" value={imageName} onChange={(e) => setImageName(e.target.value)}/>
+
+                </div>
                 <button onClick={handleClickUpload} disabled={isButtonDisabled()} className="upload">
                     Upload
                 </button>
@@ -95,33 +100,29 @@ export default function UploadToIPFS({prompt, state, dispatch}) {
                         <Spinner text={!state.uploadedImageData ? "Uploading image ..." : "Uploading metadata ..."}/>
                     </div>
                 }
-                {state.uploadedMetadata && state.fetchedMetadata &&
+                {state.uploadedMetadata && state.fetchedMetadata  &&
                     <div className="response">
-                        <div className="metadata card">
-                            <div className="row">
-                                <div className="col info">
-                                    <div className="name">
-                                        <label htmlFor="">Name</label>
-                                        <input type="text" value={state.fetchedMetadata.name} readOnly={true} />
-                                    </div>
-                                    <div className="description">
-                                        <label htmlFor="">Description</label>
-                                        <textarea value={state.fetchedMetadata.description} readOnly={true}></textarea>
-                                    </div>
-                                    <div className="image">
-                                        <label htmlFor="">Image</label>
-                                        <input type="text" value={state.fetchedMetadata.image} readOnly={true} />
-                                    </div>
+                        <div className="success-box row">
+                            <div className="ok-logo">
+                                <div className="logo-container">
+                                    <img src={ok} alt="ok" />
                                 </div>
                             </div>
-                        </div>
-                        <div className="links">
-                            <div className="image-link">
-                                <a href={`${state.fetchedMetadata.image}`} target="_blank" rel="noreferrer">Image Link</a>
+                            <div className="info">
+                                <h2>Success</h2>
+                                <p>Your image and metadata have been uploaded successfully.</p>
+                                <p>You can check them out in the following links.</p>
+                                <div className="links row">
+                                    <div className="image-link">
+                                        <a href={`${state.fetchedMetadata.image}`} target="_blank" rel="noreferrer">Image </a>
+                                    </div>
+                                    <div className="metadata-link">
+                                        <a href={`https://ipfs.io/ipfs/${state.uploadedMetadata.IpfsHash}`} target="_blank" rel="noreferrer">Metadata </a>
+                                    </div>
+                                </div>
+                                
                             </div>
-                            <div className="metadata-link">
-                                <a href={`https://ipfs.io/ipfs/${state.uploadedMetadata.IpfsHash}`} target="_blank" rel="noreferrer">Metadata Link</a>
-                            </div>
+
                         </div>
                     </div> 
                 }
@@ -136,3 +137,5 @@ export default function UploadToIPFS({prompt, state, dispatch}) {
         </div>
     )
 }
+
+
